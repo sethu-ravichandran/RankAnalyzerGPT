@@ -1,15 +1,17 @@
 import express from "express"
 import { getSERPRank } from "../services/serpService.js"
+import { updateSection } from "../utils/localStore.js"
 
 const router = express.Router()
 
-router.post("/", async (req, res) => {
+router.post("/", async (request, response) => {
   try {
-    const { website, keywords, location } = req.body
-    const data = await getSERPRank(website, keywords, location)
-    res.json(data)
+    const { website, keywords, location } = request.body
+    const serpData = await getSERPRank(website, keywords, location)
+    updateSection("serp", serpData)
+    response.json(serpData)
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    response.status(500).json({ error: error.message })
   }
 })
 

@@ -1,15 +1,17 @@
 import express from "express"
 import { getAuditReport } from "../services/auditService.js"
+import { updateSection } from "../utils/localStore.js"
 
 const router = express.Router()
 
-router.post("/", async (req, res) => {
+router.post("/", async (request, response) => {
   try {
-    const { website } = req.body
-    const data = await getAuditReport(website)
-    res.json(data)
+    const { website } = request.body
+    const auditData = await getAuditReport(website)
+    updateSection("audit", auditData)
+    response.json(auditData)
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    response.status(500).json({ error: error.message })
   }
 })
 

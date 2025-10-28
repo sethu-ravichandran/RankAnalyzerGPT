@@ -1,15 +1,18 @@
 import express from "express"
 import { generateRecommendations } from "../services/recommendationService.js"
+import { readData } from "../utils/localStore.js"
 
 const router = express.Router()
 
-router.post("/", async (req, res) => {
+router.post("/", async (request, response) => {
   try {
-    const { serp, audit, geo } = req.body
-    const data = await generateRecommendations(serp, audit, geo)
-    res.json(data)
+    const combinedData = readData()
+    const { serp, audit, geo } = combinedData
+
+    const recommendations = await generateRecommendations(serp, audit, geo)
+    response.json(recommendations)
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    response.status(500).json({ error: error.message })
   }
 })
 

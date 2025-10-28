@@ -14,6 +14,6 @@ app.use("/api/v1/audit", auditRouter)
 app.use("/api/v1/geo", geoRouter)
 app.use("/api/v1/suggestions", suggestionRouter)
 
-app.get("/", (req, res) => res.send("SEO Rank Analyzer API Running"))
+app.get("/", (request, response) => response.send("SEO Rank Analyzer API Running"))
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))

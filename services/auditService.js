@@ -5,8 +5,8 @@ export const getAuditReport = async (website) => {
 
   const url = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${website}&strategy=mobile&category=performance&category=seo&category=accessibility&category=best-practices&key=${apiKey}`
 
-  const res = await fetch(url)
-  const data = await res.json()
+  const response = await fetch(url)
+  const data = await response.json()
 
   const categories = data.lighthouseResult?.categories || {}
 
