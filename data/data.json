@@ -1,5 +1,10 @@
 {
   "serp": {},
-  "audit": {},
+  "audit": {
+    "performance": 79,
+    "seo": 100,
+    "accessibility": 79,
+    "bestPractices": 81
+  },
   "geo": {}
 }
